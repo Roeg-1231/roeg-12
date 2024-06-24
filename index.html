@@ -2,180 +2,174 @@
 <html>
 <head>
     <title>Evaluador de Estrés</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-}
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-h2 {
-    text-align: center;
-    color: #4CAF50;
-}
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
 
-.form-group {
-    margin-bottom: 20px;
-}
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
+        .slider-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
 
-.btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 15px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .15s ease-in-out;
+        }
 
-.btn:hover {
-    background-color: #45a049;
-}
+        .slider:hover {
+            opacity: 1;
+        }
 
-.result {
-    margin-top: 30px;
-    text-align: center;
-}
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
 
-.video-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-}
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
 
-.video-item {
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
+        .slider-container input {
+            flex: 1;
+            margin-left: 10px;
+        }
 
-.video-link {
-    display: block;
-    text-decoration: none;
-    color: #333;
-    transition: transform 0.2s ease;
-}
+        .slider-container span {
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
 
-.video-link:hover {
-    transform: translateY(-5px);
-}
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-.video-thumbnail img {
-    width: 100%;
-    height: auto;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
+        .btn:hover {
+            background-color: #45a049;
+        }
 
-.video-info {
-    padding: 10px;
-}
+        .result {
+            margin-top: 30px;
+            text-align: center;
+        }
 
-.video-info h4 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
 
-.video-info p {
-    margin-top: 5px;
-    font-size: 14px;
-}
+        .video-item {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
 
-.video-list li {
-    display: inline-block;
-    margin: 10px;
-}
+        .video-link {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s ease;
+        }
 
-.video-list img {
-    width: 120px;
-    height: 90px;
-    display: block;
-    margin: 0 auto;
-}
+        .video-link:hover {
+            transform: translateY(-5px);
+        }
 
-.video-list p {
-    text-align: center;
-    margin-top: 5px;
-    font-size: 14px;
-}
+        .video-thumbnail img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
 
-.slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 15px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity .15s ease-in-out;
-}
+        .video-info {
+            padding: 10px;
+        }
 
-.slider:hover {
-    opacity: 1;
-}
+        .video-info h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-}
+        .video-info p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
 
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-}
+        .video-list li {
+            display: inline-block;
+            margin: 10px;
+        }
 
-.slider-container {
-    display: flex;
-    align-items: center; /* Alinea verticalmente los elementos */
-    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor */
-    margin-top: 10px; /* Espacio arriba de la barra deslizable */
-}
+        .video-list img {
+            width: 120px;
+            height: 90px;
+            display: block;
+            margin: 0 auto;
+        }
 
-.slider-container input {
-    flex: 1; /* La barra deslizable ocupa todo el espacio disponible */
-    margin-left: 10px; /* Espacio entre el span y el input */
-}
-
-.slider-container span {
-    margin-left: 10px; /* Espacio entre el número y la barra deslizable */
-    font-size: 16px; /* Tamaño de fuente para el número */
-    font-weight: bold; /* Texto en negrita para resaltar el número */
-    color: #333; /* Color del texto */
-}
-
+        .video-list p {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+        }
     </style>
-    </style><script>
+    <script>
         function updateSliderValue(sliderId) {
             var slider = document.getElementById(sliderId);
             var output = document.getElementById('value' + sliderId.slice(1)); // Obtener el span correspondiente
@@ -186,42 +180,142 @@ input[type="number"] {
 <body>
     <div class="container">
         <h2>Formulario de Evaluación de Estrés</h2>
-        <h3>Autoria: Anjaly Saory Georgia Chávez Uscata</h3>
-        <form action="{{ url_for('predict') }}" method="post">
-            {% for question in questions %}
+        <form action="#">
             <div class="form-group">
-                <label>{{ question }}</label>
+                <label>En una escala del 1 al 5, ¿cómo describirías tu estado emocional actual?</label>
                 <div class="slider-container">
-                    <input type="range" name="q{{ loop.index }}" min="1" max="5" step="1" value="3" class="slider" id="q{{ loop.index }}" oninput="updateSliderValue(this.id)">
-                    <span id="value{{ loop.index }}">3</span> <!-- Mostrará el valor seleccionado -->
+                    <input type="range" name="q1" min="1" max="5" step="1" value="3" class="slider" id="q1" oninput="updateSliderValue(this.id)">
+                    <span id="value1">3</span>
                 </div>
-            </div>                   
-            {% endfor %}
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cuánto estrés has sentido en la última semana?</label>
+                <div class="slider-container">
+                    <input type="range" name="q2" min="1" max="5" step="1" value="3" class="slider" id="q2" oninput="updateSliderValue(this.id)">
+                    <span id="value2">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cómo calificarías la calidad de tu sueño?</label>
+                <div class="slider-container">
+                    <input type="range" name="q3" min="1" max="5" step="1" value="3" class="slider" id="q3" oninput="updateSliderValue(this.id)">
+                    <span id="value3">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cuánto ejercicio físico has hecho en la última semana?</label>
+                <div class="slider-container">
+                    <input type="range" name="q4" min="1" max="5" step="1" value="3" class="slider" id="q4" oninput="updateSliderValue(this.id)">
+                    <span id="value4">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cuánto tiempo libre has tenido para ti mismo/a?</label>
+                <div class="slider-container">
+                    <input type="range" name="q5" min="1" max="5" step="1" value="3" class="slider" id="q5" oninput="updateSliderValue(this.id)">
+                    <span id="value5">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cómo calificarías tu nivel de energía diaria?</label>
+                <div class="slider-container">
+                    <input type="range" name="q6" min="1" max="5" step="1" value="3" class="slider" id="q6" oninput="updateSliderValue(this.id)">
+                    <span id="value6">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cuán abrumado/a te has sentido en tu trabajo o estudios?</label>
+                <div class="slider-container">
+                    <input type="range" name="q7" min="1" max="5" step="1" value="3" class="slider" id="q7" oninput="updateSliderValue(this.id)">
+                    <span id="value7">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cuánto apoyo emocional has recibido de amigos o familiares?</label>
+                <div class="slider-container">
+                    <input type="range" name="q8" min="1" max="5" step="1" value="3" class="slider" id="q8" oninput="updateSliderValue(this.id)">
+                    <span id="value8">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cuán a menudo has tenido pensamientos negativos?</label>
+                <div class="slider-container">
+                    <input type="range" name="q9" min="1" max="5" step="1" value="3" class="slider" id="q9" oninput="updateSliderValue(this.id)">
+                    <span id="value9">3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>En una escala del 1 al 5, ¿cómo calificarías tu nivel de satisfacción con la vida en general?</label>
+                <div class="slider-container">
+                    <input type="range" name="q10" min="1" max="5" step="1" value="3" class="slider" id="q10" oninput="updateSliderValue(this.id)">
+                    <span id="value10">3</span>
+                </div>
+            </div>
             <div>
-                <button type="submit" class="btn">Enviar</button>
+                <button type="button" class="btn">Enviar</button>
             </div>
         </form>
-        {% if prediction_text %}
         <div class="result">
-            <h3>{{ prediction_text }}</h3>
-            <p>{{ details }}</p>
+            <h3>Nivel de Estrés: Medio</h3>
+            <p>Su nivel de estrés ha sido clasificado como medio. Aquí hay algunas recomendaciones musicales para ayudarle a relajarse:</p>
             <ul class="video-list">
-                {% for video in music_videos %}
                 <li class="video-item">
-                    <a href="{{ video.url }}" target="_blank" class="video-link">
+                    <a href="#" class="video-link">
                         <div class="video-thumbnail">
-                            <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
+                            <img src="https://via.placeholder.com/120x90.png" alt="Video 1">
                         </div>
                         <div class="video-info">
-                            <h4>{{ video.title }}</h4>
-                            <p>{{ video.description }}</p>
+                            <h4>Video 1</h4>
+                            <p>Descripción del video 1.</p>
                         </div>
                     </a>
                 </li>
-                {% endfor %}
-            </ul>            
+                <li class="video-item">
+                    <a href="#" class="video-link">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/120x90.png" alt="Video 2">
+                        </div>
+                        <div class="video-info">
+                            <h4>Video 2</h4>
+                            <p>Descripción del video 2.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="video-item">
+                    <a href="#" class="video-link">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/120x90.png" alt="Video 3">
+                        </div>
+                        <div class="video-info">
+                            <h4>Video 3</h4>
+                            <p>Descripción del video 3.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="video-item">
+                    <a href="#" class="video-link">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/120x90.png" alt="Video 4">
+                        </div>
+                        <div class="video-info">
+                            <h4>Video 4</h4>
+                            <p>Descripción del video 4.</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="video-item">
+                    <a href="#" class="video-link">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/120x90.png" alt="Video 5">
+                        </div>
+                        <div class="video-info">
+                            <h4>Video 5</h4>
+                            <p>Descripción del video 5.</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
-        {% endif %}
     </div>
 </body>
 </html>
